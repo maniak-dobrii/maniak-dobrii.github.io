@@ -1,3 +1,6 @@
+---
+layout: null
+---
 * {
 	margin: 0;
 	padding: 0;
@@ -708,7 +711,7 @@ input {
 
     float: left;
 
-    background-image: url('img/hole.gif');
+    background-image: url('{{ site.baseurl }}/img/hole.gif');
 }
 
 .copyrights {

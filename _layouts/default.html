@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- ADD meta import -->
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.description }}</title>
+  <meta name="keywords" content="{{ site.name }}" />
+  <meta name="description" content="{{ site.description }} Blog, projects, activities. Your best source on 'MANIAK_dobrii' xD" />
+
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <!--<link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" /> -->
+
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />
+
+        <!--[if IE]>
+            <link rel="stylesheet" href="style_ie.css" type="text/css" media="screen, projection" />
+        <![endif]-->
+
+        <!--[if lt IE 7]>
+            <link rel="stylesheet" href="style_ie6.css" type="text/css" media="screen, projection" />
+        <![endif]-->
+
+        {% include analytics.html %}
+
+
+</head>
+
+<body>
+<div id="wrapper">
+  <div id="header">
+                <div class="top_stripe"></div>
+    <div class="logo_wrapper"><a href="http://maniak-dobrii.ru/" id="logo">MANIAK_dobrii</a> мой дом в сети</div>
+
+                <!-- Top Menu should be here -->
+
+
+  </div><!-- #header-->
+
+  <div id="middle">
+
+      {{ content }}
+
+  </div><!-- #middle-->
+
+</div><!-- #wrapper -->
+
+<div id="footer">
+  <div id="the_hole"></div>
+        <div class="copyrights"><span class="copyrights_separator">|</span> © 2011-2015 MANIAK_dobrii</div>
+</div><!-- #footer -->
+
+</body>
+</html>

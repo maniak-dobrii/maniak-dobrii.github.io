@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I'm currently updating my website and this is its intermediate state. Here is my [old site](http://www.maniak-dobrii.com).
+I'm currently updating my website and this is its intermediate state. Here is my [old site](http://www.maniak-dobrii.ru).
 
 ### Contact me
 

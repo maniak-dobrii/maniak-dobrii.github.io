@@ -12,6 +12,13 @@
 
 code {
   font-family:'Bitstream Vera Sans Mono','Courier', monospace;
+    background-color:rgba(128,128,128, 0.1);
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+pre code,pre.prettyprint code {
+  background-color:transparent !important;
 }
 
 .highlight .c { color: #586E75 } /* Comment */

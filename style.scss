@@ -271,6 +271,24 @@ nav {
   }
 }
 
+// single line hr
+hr {
+  border: 0;
+  border-top: 1px solid rgba(128,128,128,0.1);
+}
+
+// full width tables with 1px border and centered text
+table {
+  width: 100%;
+  border: 1px solid rgba(128,128,128,0.1);
+}
+
+tr, td, th, tb {
+  text-align: center;
+  border: 1px solid rgba(128,128,128,0.1);
+  padding: 2px;
+}
+
 .wrapper-footer {
   margin-top: 50px;
   border-top: 1px solid #ddd;

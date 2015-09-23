@@ -5,15 +5,15 @@
 name: MANIAK_dobrii
 description: MANIAK_dobrii's home on the web
 
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus:
+disqus: maniak-dobrii
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: maniak-dobrii.com
+url: http://maniak-dobrii.com
 
 markdown: redcarpet
+redcarpet:
+  extensions: [tables]
 highlighter: pygments
 permalink: /:title/
 

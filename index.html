@@ -1,17 +1,35 @@
 ---
 layout: default
+nav_id: posts
 ---
 
 <div class="posts">
   {% for post in site.posts %}
-    <article class="post">
+	<div class="post_wrapper">
+                        <div class="post_meat">
+                            <div class="post_header">
+                                <span class="post_header_datetime">
+                                    {{ post.date | date: "%B %e, %Y" }}
+                                </span>
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+                                <span class="post_header_topic">
+                                    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                                </span>
 
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
+                                <div class="post_content">
+                                    {{ post.excerpt }}
+                                </div>
 
-    </article>
+
+                            </div>
+
+                        </div>
+
+	</div>
+
+
   {% endfor %}
 </div>
+
+
+

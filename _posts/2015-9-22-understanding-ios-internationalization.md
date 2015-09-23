@@ -3,10 +3,6 @@ layout: default
 title: Understanding iOS internationalization
 ---
 
-
-Understanding iOS internationalization
---
-
 I assume reader is already familiar with basic internationalization facilities and approaches used in iOS apps development. The distinctions and details I cover in this article were a bit confusing for me when I first started introducing internationalization in my apps, so I decided to wrap it up for myself and any curious developer.
 
 Let's inspect iOS **Language & Region** settings, parameters we're interested in: 
@@ -33,7 +29,7 @@ As I've mentioned above, there's a concept of **the language our app is running 
 
 |Available localizations 			   | Preferred languages			          | Preferred localizations             |
  --------------------------------------|------------------------------------------|-------------------------------------
-|`no order` 			 				   | `top to bottom`			  		       	  | 					                |
+|`no order` 			 			   | `top to bottom`			  	    	  | 					                |
 | it, **en**, ru(dev) 				   | fr, **en**, ru			                  | **en** 							    |
 | it, **en**, ru(dev) 				   | **en**, pl, it                     	  | **en** 							    |
 | it, **en**, ru(dev) 				   | **en-GB**, pl, it                     	  | **en** 							    |
@@ -387,8 +383,9 @@ Say, you need to have pluralized string and format numbers in some way that form
 </dict>
 ```
 and use it like this:
+
 <!-- language: lang-objc -->
-```
+``` objc
 NSUInteger number = 42;
 // no comments for the sake of compactness
 NSString *format = NSLocalizedString(@"custom_format", nil);

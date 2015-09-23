@@ -31,12 +31,19 @@
                 <div class="top_stripe"></div>
     <div class="logo_wrapper"><a href="{{ site.baseurl }}/" id="logo">MANIAK_dobrii</a> мой дом в сети</div>
 
-                <!-- Top Menu should be here -->
-
-
+                <!-- Top Menu -->
+                {% assign navigation_id = "posts" %}
+                {% if page.nav_id %} {% assign navigation_id = page.nav_id %} {% endif %}
+                <div id="top_menu">
+                  <a id="posts" class="top_menu_item{% if navigation_id == "posts" %} top_menu_selected_item{% endif %}" href="/">Posts</a>
+                  <a id="about" class="top_menu_item{% if navigation_id == "about" %} top_menu_selected_item{% endif %}" href="/about.html">About</a>
+                </div>                               
+                <!-- EndOF Top Menu -->
   </div><!-- #header-->
 
   <div id="middle">
+
+
 
     {% if page.title %}
                 <div class="full_post_header">
@@ -48,12 +55,16 @@
                 <div class="full_post_datetime">
                   <img src="{{ site.baseurl }}/img/date.gif" style="margin-right: 0.2em;" /> {{ page.date | date: "%B %e, %Y" }} 
                 </div>
+                <div class="full_post_content">
     {% endif %}
 
+      
       {{ content }}
 
       {% if page.title %}
+    </div> <!-- full_post_content -->
         <div class="comments_dash">comments</div>
+        {% include disqus.html %}
       {% endif %}
 
   </div><!-- #middle-->

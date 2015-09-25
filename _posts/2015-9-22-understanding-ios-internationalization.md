@@ -21,7 +21,7 @@ This settings render behaviors which could be separated into two major distinct 
  2. Everything related to what **regional conventions** are being used for displaying locale-sensitive data, you access this information via `NSLocale`. Settings that specify that:  `region`, `region language`, `calendar`.
  
 >Important thing is that, while **usually this two are the same**, so that regional conventions are for the language app is running in, it **may often not be the case**. 
->And we must obey our user's will (most of the time), say, displaying strings in english, using english plural rules while presenting numbers using russian decimal separators and dates in budhist calendar.
+>And we must obey our user's will (most of the time), say, displaying strings in English, using English plural rules while presenting numbers using Russian decimal separators and dates in budhist calendar.
 
 I've mentioned NSBundle and NSLocale. You may think of them like this: NSLocale tells you about user settings without taking into account what your app provides. NSBundle looks at your app and tells you which of what your app provides you should use according to user settings. So, NSBundle is usually the one to ask for language. Say, there's a girl **Jane**, who likes [`young`, `handsome`, `broke`] guys, and there is you - [`middle-aged`, `handsome` and `rich`]. So, for sure, you'd better use `the way you look` and mute about your `age` and `wealth` to get with her. If you talk to Jane's sister, she'll tell you about Jane's priorities in general, that's NSLocale. If you talk to your buddy - he'll advice you to weight upon something you're good at among what Jane likes, that's NSBundle.
 
@@ -49,7 +49,7 @@ Or `locale ID` vs `language ID`, "locale" vs "localization". Yeah, they are not 
 > "A language ID identifies a language used in many regions, a dialect used in a specific region, or a script used
 in multiple regions." **- Internationalization and Localization Guide**
 
-Language described by `language ID`, such as `en` could be used to describe english language used worldwide, while `en-UK` (note `-`, not `_`) describes english language used in United Kingdom. And you may have two different versions of text for a two, for example:
+Language described by `language ID`, such as `en` could be used to describe English language used worldwide, while `en-UK` (note `-`, not `_`) describes English language used in United Kingdom. And you may have two different versions of text for a two, for example:
 
 ```
 en-UK: "I have just arrived home, so I shall use my monocle to read newspaper while having my tea."
@@ -61,11 +61,11 @@ Your `.lproj` directories with localized resources for languages are called afte
 > A locale ID identifies a specific region and its cultural conventions—such as the formatting of dates, times, and
 numbers. **- Internationalization and Localization Guide**
 
-While it may look the same, locale ID is semantically different. `Locale ID` is composed of `language ID` and optional `region designator` (ISO 3166-1, like US for United States and FR for france) joined by underscore `_`. A hint to understanding is that you read it right to left, i.e. "region with specific conventions where this language/dialect/script is used". So:
+While it may look the same, locale ID is semantically different. `Locale ID` is composed of `language ID` and optional `region designator` (ISO 3166-1, like US for United States and FR for France) joined by underscore `_`. A hint to understanding is that you read it right to left, i.e. "region with specific conventions where this language/dialect/script is used". So:
 
- `en` = "some region where english is used".<br/>
- `en_US` = "United States regional preferences for english-speakers".<br/>
- `ru_US` = "United States regional preferences for russian-speakers".<br/>
+ `en` = "some region where English is used".<br/>
+ `en_US` = "United States regional preferences for English speakers".<br/>
+ `ru_US` = "United States regional preferences for Russian speakers".<br/>
  `zh-Hans_HK` = "China, Hong Kong's regional preferences for Chinese in the simplified script"<br/>
 
 Locale is used when formatting locale-sensitive data like numbers, dates and names. Locale incapsulates a lot of different settings such as language (at minimum), date and number formats, currency and how different currencies are to be displayed and a lot more. Apple uses [Common Locale Data Repository (CLDR)](http://cldr.unicode.org/) for that data, you can access that information via NSLocale API.
@@ -204,7 +204,7 @@ NSLog(@"[[NSBundle mainBundle] preferredLocalizations] = %@", [[NSBundle mainBun
 NSLog(@"[NSLocale currentLocale].localeIdentifier = %@", [NSLocale currentLocale].localeIdentifier); // regional conventions
 NSString *format = NSLocalizedString(@"format_key", nil); // as in example above
 
-NSUInteger numForMany = 5; // it should be mapped to "many" in russian(ru) and "other" in english(en)
+NSUInteger numForMany = 5; // it should be mapped to "many" in Russian(ru) and "other" in English(en)
 
 // ru
 NSLocale *ruLocale = [NSLocale localeWithLocaleIdentifier:@"ru"];
@@ -235,7 +235,7 @@ And that what it outputs with language set to Russian, while regional settings a
 2015-09-21 12:56:00.272 LocalizationTests[99346:9581633] en_US (currentLocale) for 5: MANY
 ```
 
-That's good, it uses correct plural rules for the `.stringsdict`, which **contains strings in russian for russian plural forms**. No matter which NSLocale I provide, it uses correct plural rules and formats numbers according to settings from NSLocale.
+That's good, it uses correct plural rules for the `.stringsdict`, which **contains strings in Russian for Russian plural forms**. No matter which NSLocale I provide, it uses correct plural rules and formats numbers according to settings from NSLocale.
 
 ```
 // iOS 9
@@ -322,7 +322,7 @@ NSString *getPluralForm(double value, NSLocale *locale)
     return form ?: @"other";
 }
 ```
-Provided method takes a double to decide plural form for and a locale to base the plural rules on. Note though, that you may not get the results you expect. For example if you expect it to return `zero` form for `0` it might not if in CLDR there's no such rule for your locale. That is the case with russian `ru`, in [CLDR](http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html#ru) `zero` form for `ru` is not specified and 0 maps to `many`. Looks like Apple did something above that, using `zero` form for 0, so that you can supply different string like *"There are no somethings"* instead of *"0 somethings"*. And it is perfectly fine, as, according to [CLDR Specifications‎](http://cldr.unicode.org/index/cldr-spec/plural-rules) implementations are encouraged to do so.
+Provided method takes a double to decide plural form for and a locale to base the plural rules on. Note though, that you may not get the results you expect. For example if you expect it to return `zero` form for `0` it might not if in CLDR there's no such rule for your locale. That is the case with Russian `ru`, in [CLDR](http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html#ru) `zero` form for `ru` is not specified and 0 maps to `many`. Looks like Apple did something above that, using `zero` form for 0, so that you can supply different string like *"There are no somethings"* instead of *"0 somethings"*. And it is perfectly fine, as, according to [CLDR Specifications‎](http://cldr.unicode.org/index/cldr-spec/plural-rules) implementations are encouraged to do so.
 > "However, implementations are encouraged to provide the ability to have special plural messages for 0 in particular, so that more natural language can be used." **- CLDR Specifications, Plural rules**
 
 I've created demo project with the code above, you can get in [on github](https://github.com/maniak-dobrii/iOS-solutions/tree/master/ICU%20plural%20rules).
@@ -331,11 +331,11 @@ I've created demo project with the code above, you can get in [on github](https:
 ----------
 
 
-Now it is more clear how those groups of settings are used by internationalizations APIs. I've been asked a lot about how to use internationalization APIs, so I desided to include some good practices I follow here as well.
+Now it is more clear how those groups of settings are used by internationalizations APIs. I've been asked a lot about how to use internationalization APIs, so I decided to include some good practices I follow here as well.
 
 
 ###Base internationalization
-It's a fancy name for separating your storyboards/nibs UI from text, so, instead of supporting million copies of storyboard/nib you just manage million versions of .strings files and single storyboard/nib. I still don't find it much usefull as I don't store much user facing strings in storyboards/nibs, but it really worth it. Localization native development region or `CFBundleDevelopmentRegion`  tells which localization is your Base locale.
+It's a fancy name for separating your storyboards/nibs UI from text, so, instead of supporting million copies of storyboard/nib you just manage million versions of .strings files and single storyboard/nib. I still don't find it much useful as I don't store much user facing strings in storyboards/nibs, but it really worth it. Localization native development region or `CFBundleDevelopmentRegion`  tells which localization is your Base locale.
 
 ###Localized strings keys
 Apple guys like to say that the keys of your `NSLocalizedString`s are in development language, the language used to create resources. They advertise it as a possibility to keep your 'fancy' strings around at the same time providing internationalization support.
@@ -459,7 +459,7 @@ NSString *string = [[NSString alloc] initWithFormat:format
                     number, spelledCount];
 ```
 
-Yeah that's the option, but you should be extremely careful with this technique. What you a doing here is actually selecting plural form for one number and displaying completely another number. This looks safe for spell out style, but what if you do some rounding or precision adjustment? You may end up having number and formatted number be mapped to different plural forms. For example, if you do some rounding like `maximumFractionDigits` on a `NSNumberFormatter`, have 1.1 and round it to 1. In russian 1.1 maps to `other`, while 1 maps to `one`! I suggest you to be reasonable and careful, don't make any assumptions.
+Yeah that's the option, but you should be extremely careful with this technique. What you a doing here is actually selecting plural form for one number and displaying completely another number. This looks safe for spell out style, but what if you do some rounding or precision adjustment? You may end up having number and formatted number be mapped to different plural forms. For example, if you do some rounding like `maximumFractionDigits` on a `NSNumberFormatter`, have 1.1 and round it to 1. In Russian 1.1 maps to `other`, while 1 maps to `one`! I suggest you to be reasonable and careful, don't make any assumptions.
 
 
 ----------

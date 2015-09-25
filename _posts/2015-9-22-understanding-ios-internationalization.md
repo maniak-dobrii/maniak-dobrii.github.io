@@ -93,7 +93,7 @@ A quick gotcha for `.stringsdict`: don't forget to have (at least empty) `.strin
 ----------
 
 
-As you can see now, these were two distinct groups of settings, when you change value from one of the groups the other may remain untouched. So you can change system language to Chinese and that does not result in changing region to chinese as well. And now, let's dig into some nerdy details under the hood. As I'm always not satisfied until certain amount of understanding has been reached.
+As you can see now, these were two distinct groups of settings, when you change value from one of the groups the other may remain untouched. So you can change system language to Chinese and that does not result in changing region to Chinese as well. And now, let's dig into some nerdy details under the hood. As I'm always not satisfied until certain amount of understanding has been reached.
 
 ###How -[NSString initWithFormat:locale:arguments:] converts numbers to string representation?
 Take this lines of code:

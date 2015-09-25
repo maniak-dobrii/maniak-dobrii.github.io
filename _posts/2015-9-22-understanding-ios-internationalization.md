@@ -21,7 +21,7 @@ This settings render behaviors which could be separated into two major distinct 
  2. Everything related to what **regional conventions** are being used for displaying locale-sensitive data, you access this information via `NSLocale`. Settings that specify that:  `region`, `region language`, `calendar`.
  
 >Important thing is that, while **usually this two are the same**, so that regional conventions are for the language app is running in, it **may often not be the case**. 
->And we must obey our user's will (most of the time), say, displaying strings in English, using English plural rules while presenting numbers using Russian decimal separators and dates in budhist calendar.
+>And we must obey our user's will (most of the time), say, displaying strings in English, using English plural rules while presenting numbers using Russian decimal separators and dates in the Buddhist calendar.
 
 I've mentioned NSBundle and NSLocale. You may think of them like this: NSLocale tells you about user settings without taking into account what your app provides. NSBundle looks at your app and tells you which of what your app provides you should use according to user settings. So, NSBundle is usually the one to ask for language. Say, there's a girl **Jane**, who likes [`young`, `handsome`, `broke`] guys, and there is you - [`middle-aged`, `handsome` and `rich`]. So, for sure, you'd better use `the way you look` and mute about your `age` and `wealth` to get with her. If you talk to Jane's sister, she'll tell you about Jane's priorities in general, that's NSLocale. If you talk to your buddy - he'll advice you to weight upon something you're good at among what Jane likes, that's NSBundle.
 
@@ -68,9 +68,9 @@ While it may look the same, locale ID is semantically different. `Locale ID` is 
  `ru_US` = "United States regional preferences for Russian speakers".<br/>
  `zh-Hans_HK` = "China, Hong Kong's regional preferences for Chinese in the simplified script"<br/>
 
-Locale is used when formatting locale-sensitive data like numbers, dates and names. Locale incapsulates a lot of different settings such as language (at minimum), date and number formats, currency and how different currencies are to be displayed and a lot more. Apple uses [Common Locale Data Repository (CLDR)](http://cldr.unicode.org/) for that data, you can access that information via NSLocale API.
+Locale is used when formatting locale-sensitive data like numbers, dates and names. Locale encapsulates a lot of different settings such as language (at minimum), date and number formats, currency and how different currencies are to be displayed and a lot more. Apple uses [Common Locale Data Repository (CLDR)](http://cldr.unicode.org/) for that data, you can access that information via NSLocale API.
 
-`Locale ID` may include different components, which override different preferences, for example, to override calendar to buddhist you may add `calendar` component like this: `en_US@calendar=buddhist`. 
+`Locale ID` may include different components, which override different preferences, for example, to override calendar to the Buddhist you may add `calendar` component like this: `en_US@calendar=buddhist`. 
 
 ###Preferred languages vs preferred localizations
 Both of these are ordered lists of `language ID`s. **Preferred languages** is the list of languages user prefers, you can see it in the settings: 
@@ -165,7 +165,7 @@ Now you see? I've "separated" loading format string from `.stringsdict` and actu
 Also, NSString must have nothing to do with `.stringsdict` xml loading, that means rather NSLocalizedString returns this information, or Apple is using some top mountain purple unicorn magic. 
 
 As you know, NSString is one of those [Class Clusters](https://developer.apple.com/library/mac/documentation/General/Conceptual/DevPedia-CocoaCore/ClassCluster.html). That means, that the real class behind "NSString" instance could be very much anything as far as it's derivative of or binary compatible with the abstract `NSString` class.
-If `NSLocalizedString` finds `.stringsdict` for a key it returns an instance of the special `__NSLocalizedString` class. `__NSLocalizedString` incapsulates the `original` string and `config` dictionary.  The `config` dictionary contains info from the `.stringsdict` file. Here what it's like (iOS8 and iOS9 unchanged) for the `.stringsdict` listed above: 
+If `NSLocalizedString` finds `.stringsdict` for a key it returns an instance of the special `__NSLocalizedString` class. `__NSLocalizedString` encapsulates the `original` string and `config` dictionary.  The `config` dictionary contains info from the `.stringsdict` file. Here what it's like (iOS8 and iOS9 unchanged) for the `.stringsdict` listed above: 
 
 ```
 format.original = "%1$#@format_key_plural@"

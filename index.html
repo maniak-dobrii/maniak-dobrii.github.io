@@ -6,7 +6,8 @@ layout: default
   {% for post in site.posts %}
     <article class="post">
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+      <h1 style="line-height:1;"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><br/>
+      <span style="font-size:0.5em;color:rgb(120, 120, 120);">{{ post.date | date: "%B&nbsp;%e,&nbsp;%Y" }}</span></h1>
 
       <div class="entry">
         {{ post.excerpt }}

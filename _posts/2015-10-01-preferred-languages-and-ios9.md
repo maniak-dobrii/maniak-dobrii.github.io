@@ -5,7 +5,7 @@ title: Preferred languages and iOS 9
 
 In iOS 9 Apple introduced some [changes](https://developer.apple.com/library/ios/technotes/tn2418/_index.html#//apple_ref/doc/uid/DTS40016588-CH1-LANGUAGE_IDENTIFIERS_IN_IOS_9) at how NSLocale `+preferredLanguages` returns languages. It returns strings like `en-US`, `ru-RU` instead of `en`, `ru` as it used to. Some (looks like a lot) of developers got confused by that, they reported that behavior as a bug, it even broke some codebases. The sad truth is that if this change breaks your codebase, you used it wrong making false assumptions.
 
-As I've noted in my [previous article]({% post_url 2015-9-22-understanding-ios-internationalization %}), `+preferredLanguages` returns `language ID`s. `Language ID` [is a combination of](https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html):
+As I've noted in my [previous article]({% post_url 2015-9-22-understanding-ios-internationalization %}), `+preferredLanguages` returns `language ID`s. In iOS and OS X `Language ID` [is a combination of](https://developer.apple.com/library/ios/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html):
 
  1. **Required** language designator, like `en` or `ru`.
  2. **Optional** script designator, like `Hans` or `Hant`.

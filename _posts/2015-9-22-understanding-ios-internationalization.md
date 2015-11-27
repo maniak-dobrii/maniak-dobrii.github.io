@@ -470,6 +470,7 @@ If you are looking for some deeper insight on the topic, here are some relevant 
  - [Apple's umbrella page with links to different internationalization info (including WWDC sessions)](https://developer.apple.com/internationalization/) 
  - [objc.io 9 - String Localization](https://www.objc.io/issues/9-strings/string-localization/)
  - ["iOS Internationalization, The Complete Guide"](https://www.google.ru/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CBwQFjAAahUKEwjdwKvsmIjIAhUkcHIKHfb-DSc&url=http://www.amazon.com/iOS-Internationalization-The-Complete-Guide-ebook/dp/B00R33W0BY&usg=AFQjCNF3E9g09QO1K_FKFVMvm5h9u9-aWg) by Shawn E. Larson
+ - [Dark corners of Unicode](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/) by Eevee, for quick details on Unicode
  - [NSHipster - NSLocale](http://nshipster.com/nslocale/)
  - [Unicode CLDR Project](http://cldr.unicode.org/index)
  - [International Components for Unicode](http://site.icu-project.org/)

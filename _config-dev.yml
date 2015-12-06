@@ -1,0 +1,6 @@
+#
+# Config additions for local jekyll serve (so that code could determine if it's development or not)
+#
+
+# It's development
+is_development: true

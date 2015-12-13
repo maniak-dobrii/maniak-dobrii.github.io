@@ -5,7 +5,7 @@ title: Bicycle a day
 
 Ok, here's my idea. I'll try to **create something every day**, well, probably not every day =) Even not every week, but the point is to converge to single something per day velocity.
 
-![Bicycle creation graph]({{ site.baseurl }}/images/bad/bicycles-graph.png)
+![Bicycle creation graph]({{ site.baseurl }}/images/bad/bicycles-graph.PNG)
 
 That could be anything, not only code, something silly or pretty advanced, a drawing or new trampoline trick, maybe some electronic device or useless formula. 
 

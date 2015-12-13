@@ -5,16 +5,17 @@ layout: default
 <div class="posts">
   {% for post in site.posts %}
 
-    {% assign excluded_category = 'bad' %}
-    {% assign is_excluded_category_present = false %}
+    {% assign required_category = 'bad' %}
+    {% assign is_required_category_present = false %}
 
     {% for category in post.categories %}
-      {% if category == excluded_category %}
-        {% assign is_excluded_category_present = true %}
+      {% if category == required_category %}
+        {% assign is_required_category_present = true %}
       {% endif %}
     {% endfor %}
 
-    {% if is_excluded_category_present == false %}
+
+    {% if is_required_category_present %}
       <article class="post">
 
         <h1 style="line-height:1;"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><br/>

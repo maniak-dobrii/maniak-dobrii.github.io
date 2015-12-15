@@ -31,3 +31,4 @@ double MDMathCeil(double positiveValue, unsigned int decimalDigits)
 ```
 
 Where can it be used? Well, for pluralization, guess I should write full article on that.
+Note that this works only for positive doubles and will likely overflow the double for big `positiveValue`/`decimalDigits`, but it works perfectly for something like 12345.12345, 5 and a lot above.

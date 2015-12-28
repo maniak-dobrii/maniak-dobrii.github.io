@@ -26,13 +26,6 @@ body {
   height: 100%;
 }
 
-.container {
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 0 10px;
-  width: 100%;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
   color: $darkerGray;
@@ -150,23 +143,25 @@ img {
 /*********************/
 
 #wrapper {
-  /* для Ie6 установлена фиксированная ширина*/
-        min-width: $minWi;
-        max-width: $maxWi;
+  min-width: $minWi;
+  max-width: $maxWi;
 
   margin: 0 auto;
   min-height: 100%;
   height: auto !important;
   height: 100%;
+
+  /* This is required to include the top stripe */
+  padding-top: $topStripeHe;
+  margin-top: -$topStripeHe;
 }
 
 
-//
-// header
-//
+/* Header
+------------------------------------------------------------------- */
 .top-stripe {
     width: 100%;
-    height: 0.3em;
+    height: $topStripeHe;
 
     background-color: #3c9f45;
 }
@@ -212,9 +207,14 @@ nav {
   }
 }
 
-//
-// .main
-//
+/* Middle
+------------------------------------------------------------------- */
+main {
+  width: 100%;
+  padding: 0 0 100px;
+  height: 1%;
+  position: relative;
+}
 
 .posts > .post {
   padding-bottom: 2em;
@@ -272,17 +272,36 @@ tr, td, th, tb {
   padding: 2px;
 }
 
-.wrapper-footer {
-  margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: $lightGray;
+/* Footer
+------------------------------------------------------------------- */
+footer {       
+  min-width: $minWi;
+  max-width: $maxWi;
+  margin: -100px auto 0;
+  height: 100px;
+  position: relative;
 }
 
-footer {
-  padding: 20px 0;
-  text-align: center;
+#the_hole {
+    width: 92px;
+    height: 94px;
+
+    float: left;
+
+    background-image: url('{{ site.baseurl }}/images/hole.gif');
 }
+
+.copyrights {
+    padding: 41px 0 0 0;
+    font-size: 12px;
+}
+
+.copyrights_separator {
+    font-size: 24px;
+    color: #e8e7e8;
+    margin: 0 4px;
+}
+
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start

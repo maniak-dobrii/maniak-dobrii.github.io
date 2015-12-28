@@ -11,34 +11,30 @@
   </head>
 
   <body>
+    <div class="top-stripe"></div>    
+    <div id="wrapper"> <!-- wrapper  -->
+      <header class="header clearfix">
+        <a href="{{ site.baseurl }}/" id="logo">MANIAK_dobrii</a>
 
-    <div class="top-stripe"></div>
-      <div id="wrapper"> <!-- wrapper  -->
-        <header class="clearfix">
-          <a href="{{ site.baseurl }}/" id="logo">MANIAK_dobrii</a>
-
-          <nav>
-            {% include nav.html %}
-            <a href="{{ site.baseurl }}/" {% if nav_id == "posts" %} class="selected" {% endif %}>posts</a>
-            <a href="{{ site.baseurl }}/bad/" {% if nav_id == "bad" %} class="selected" {% endif %}>bad</a>
-            <a href="{{ site.baseurl }}/about" {% if nav_id == "about" %} class="selected" {% endif %}>about</a>
-          </nav>
-        </header>
+        <nav>
+          {% include nav.html %}
+          <a href="{{ site.baseurl }}/" {% if nav_id == "posts" %} class="selected" {% endif %}>posts</a>
+          <a href="{{ site.baseurl }}/bad/" {% if nav_id == "bad" %} class="selected" {% endif %}>bad</a>
+          <a href="{{ site.baseurl }}/about" {% if nav_id == "about" %} class="selected" {% endif %}>about</a>
+        </nav>
+      </header>
 
 
-        <div id="main" role="main" class="container">
-          {{ content }}
-        </div>
-      </div> <!-- ENDOF wrapper -->
+      <main id="main" role="main">
+        {{ content }}
+      </main>
+    </div> <!-- ENDOF wrapper -->
 
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
-      </div>
-    </div>
-
-    {% include analytics.html %}
+    <footer class="footer">
+        <div id="the_hole"></div>
+        <div class="copyrights"><span class="copyrights_separator">|</span> © 2011-2015 MANIAK_dobrii</div>
+    </footer>
   </body>
+
+  {% include analytics.html %}
 </html>

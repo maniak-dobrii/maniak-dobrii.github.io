@@ -5,40 +5,31 @@
 
     {% include meta.html %}
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     <link rel="icon" href="{{ site.baseurl }}/favicon.ico" type="image/x-icon" />
-
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
   </head>
 
   <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
 
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
+    <div class="top-stripe"></div>
+      <div id="wrapper"> <!-- wrapper  -->
+        <header class="clearfix">
+          <a href="{{ site.baseurl }}/" id="logo">MANIAK_dobrii</a>
 
           <nav>
-            <a href="{{ site.baseurl }}/">posts</a>
-            <a href="{{ site.baseurl }}/bad/">bad</a>
-            <a href="{{ site.baseurl }}/about">about</a>
+            {% include nav.html %}
+            <a href="{{ site.baseurl }}/" {% if nav_id == "posts" %} class="selected" {% endif %}>posts</a>
+            <a href="{{ site.baseurl }}/bad/" {% if nav_id == "bad" %} class="selected" {% endif %}>bad</a>
+            <a href="{{ site.baseurl }}/about" {% if nav_id == "about" %} class="selected" {% endif %}>about</a>
           </nav>
         </header>
-      </div>
-    </div>
 
-    <div id="main" role="main" class="container">
-      {{ content }}
-    </div>
+
+        <div id="main" role="main" class="container">
+          {{ content }}
+        </div>
+      </div> <!-- ENDOF wrapper -->
 
     <div class="wrapper-footer">
       <div class="container">

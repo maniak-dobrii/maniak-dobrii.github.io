@@ -43,7 +43,7 @@ Check this [QA: How iOS Determines the Language For Your App](https://developer.
 Regional conventions is quite an interesting topic by itself but I won't go into big detail about that. They describe conventions based on cultural, historical and lingual context. **People expect those conventions to be followed and may be seriously confused or even seduced if not.** This includes, for example, how numbers and dates are formatted, how strings are manipulated (sort, search, transformation), how currency symbols are presented, even whether first name goes before last name or metric system is preferred or not. You access information about those conventions via such APIs as `NSLocale`, `NSNumberFormatter`, `NSDateFormatter`, `AddressBook` (`NSPersonNameComponentsFormatter` in iOS9+) and others. The list of such peculiarities could be extended, but the main thing to get is that those are **vital and hard to maintain by yourself**. Apple provided us with a fascinating internationalization APIs and if you didn't yet, you should definitely familiarize yourself with them.
 For more information about regional conventions (and internationalization at all) I suggest to investigate [Apple's umbrella page with links to different internationalization info (including WWDC sessions)](https://developer.apple.com/internationalization/) and ["iOS Internationalization, The Complete Guide"](https://www.google.ru/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CBwQFjAAahUKEwjdwKvsmIjIAhUkcHIKHfb-DSc&url=http://www.amazon.com/iOS-Internationalization-The-Complete-Guide-ebook/dp/B00R33W0BY&usg=AFQjCNF3E9g09QO1K_FKFVMvm5h9u9-aWg) by Shawn E. Larson.
 
-###Locale vs language
+### Locale vs language
 Or `locale ID` vs `language ID`, "locale" vs "localization". Yeah, they are not the same. Language or localization describes (surprisingly) language/dialect/script and locale describes region with its conventions. 
 
 > "A language ID identifies a language used in many regions, a dialect used in a specific region, or a script used
@@ -94,7 +94,7 @@ A quick gotcha for `.stringsdict`: don't forget to have (at least empty) `.strin
 
 As you can see now, languages and regional conventions are two distinct groups of settings, when you change value from one of the groups the other may remain untouched. So you can change system language to Chinese and that does not result in changing region to Chinese as well. And now, let's dig into some nerdy details under the hood. As I'm always not satisfied until certain amount of understanding has been reached.
 
-###How -[NSString initWithFormat:locale:arguments:] converts numbers to string representation?
+### How -[NSString initWithFormat:locale:arguments:] converts numbers to string representation?
 Take this lines of code:
 
 <!-- language: lang-objc -->
@@ -111,7 +111,7 @@ NSInteger numberOfItems = 42;
 I wondered about how does it transform from NSInteger to NSString and inserts it instead of the format specifier, so I digged in with [Hopper](http://hopperapp.com/) and got that it uses `CFNumberFormatter`. It uses core foundation's `CFNumberFormatter` in `__CFStringFormatLocalizedNumber` called from `___CFStringAppendFormatCore`. This means you can't change formatter or configure it somehow (only via format specifier configuration like `"%.6f"`). You actually can cheat and format number yourself, but it gets tricky with pluralization, see corresponding section below for details.
 For objects with `%@` specifier it sends `-descriptionWithLocale:`.
 
-###How -[NSString initWithFormat:locale:arguments] picks correct string from .stringsdict?
+### How -[NSString initWithFormat:locale:arguments] picks correct string from .stringsdict?
 Before I go into detail about that one, I'd like to address some fascinating issue. Consider we have an `.stringsdict` with a pluralized format string for a `format_key` key:
 
 ``` xml
@@ -259,7 +259,7 @@ Note, that you're not using `currentLocale`, thus, even though you'll get correc
 
 ICU is implemented using plural rules based on [Common Locale Data Repository (CLDR)](http://cldr.unicode.org/), you can find rule definitions [here](http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html). As far as Apple's internationalization API is based on ICU, it worth to check out the [locale concept](http://userguide.icu-project.org/locale) used in ICU.
 
-###Forcing NSLocalizedString to use specific locale's plural rules
+### Forcing NSLocalizedString to use specific locale's plural rules
 While I was digging CoreFoundation with [Hopper](http://hopperapp.com/) I found that there was a reference to additional `NSStringFormatLocaleKey` key near `NSStringFormatSpecTypeKey` and `NSStringFormatValueTypeKey`. From the decompiled code it looked like if this key was present, it was used as a locale to get plural rules for. Unfortunately the value behind this key must be an locale object, not string `locale-ID`, so you can't just add it along with a `.stringsdict`. That means that there's only a hacky way to force locale from code:
 
 <!-- language: lang-objc -->
@@ -273,7 +273,7 @@ NSMutableDictionary *mutableConfig = [configuration mutableCopy];
 
 And this only works in iOS8-. I strongly discourage anybody from using this in production.
 
-###Using built in ICU for custom pluralization
+### Using built in ICU for custom pluralization
 If you're planning to build your own internationalization SDK with different plural rules, I could suggest you to stick with what Apple did and base it on [ICU](http://site.icu-project.org/). As I've mentioned, apple uses ICU's `uplrules_select` and friends for plural form selection.  Apple supplies required object code with `CoreFoundation` in `libicucore.A.dylib`. Unfortunately Apple does not provide **upluralrules.h** where the most interesting for the topic functions are, so you'll have to add it yourself.
 So, to make use of it, you have to get upluralrules.h, for example [here](http://www.opensource.apple.com/source/ICU/ICU-491.11.3/icuSources/i18n/unicode/upluralrules.h) and add `libicucore.A.dylib` just like you add frameworks in XCode. Here's an example how you could use that:
 
@@ -333,10 +333,10 @@ I've created demo project with the code above, you can get in [on github](https:
 Now it is more clear how those groups of settings are used by internationalizations APIs. I've been asked a lot about how to use internationalization APIs, so I decided to include some good practices I follow here as well.
 
 
-###Base internationalization
+### Base internationalization
 It's a fancy name for separating your storyboards/nibs UI from text, so, instead of supporting million copies of storyboard/nib you just manage million versions of .strings files and single storyboard/nib. I still don't find it much useful as I don't store much user facing strings in storyboards/nibs, but it really worth it. Localization native development region or `CFBundleDevelopmentRegion`  tells which localization is your Base locale.
 
-###Localized strings keys
+### Localized strings keys
 Apple guys like to say that the keys of your `NSLocalizedString`s are in development language, the language used to create resources. They advertise it as a possibility to keep your 'fancy' strings around at the same time providing internationalization support.
 
 <!-- language: lang-objc -->
@@ -394,7 +394,7 @@ Localized.strings
 
 This approach eliminates all the described cons above, if you have missing translation this ugly dotty-english thingy appears instead of your 'fancy' string, so you won't miss that. It provides more context for localizer, it happens that they don't even see the app, only the files to translate, so it could be crucial.
 
-###NSLocalizedString comments
+### NSLocalizedString comments
 Use them. Really, they are crucial. They provide the most context you actually can provide.
 
 ``` objc
@@ -405,14 +405,14 @@ label.text = NSLocalizedString(@"Text in my language", nil); // where are the co
 
 It's not about whether use them or not, but about what to supply. The rule of thumb for me is to provide all the information needed for localizers to understand what that string is about by only using the `.strings` file itself. That means that localizers should be able to translate your strings having only the .strings files you provide, they even might not have the app. And this really happens, often localizers are just only given the strings files to translate.
 
-###I'll add internationalization later
+### I'll add internationalization later
 If your app supports only single language it could be tempting to hardcode the locale or even don't use the internationalization APIs at all. This could seem a time-saver and all-the-things-simplifier, but the time saved does not worth it and, actually, this usually takes more time if internationalization APIs were not used from the day 0. Even if you're not planning to support multiple languages, separating text from code is a significant thing to do. I don't suggest to go crazy and, say, always support RTL UI in a flashlight app,  you (or your product owner) should just be reasonable and decide based on your target auditory not if at all but at how much you should introduce internationalization APIs in your app. At least use `NSLocalizedString` so you could extract and provide your .strings to your editors in minutes and, after that, update all the text in the app by the means of just replacing the files.  
 
-###When should I not use currentLocale
+### When should I not use currentLocale
 Most of the time if you are to supply an NSLocale instance somewhere it should be obtained rather via `+[NSLocale currentLocale]` or `+[NSLocale autoupdatingCurrentLocale]`. But there are cases when you better not.  One of such examples is when you use `NSNumberFormatterSpellOutStyle` with `NSNumberFormatter`. Your app runs in some language, thus .strings files are from according `.lproj` dir in some language. Here you better use locale based on the language app is running.
 The main thing is that you should always think and not blindly supply `currentLocale` everywhere you see `NSLocale` argument.
 
-###Formatting numbers and pluralization is tricky
+### Formatting numbers and pluralization is tricky
 Say, you need to have pluralized string and format numbers in some way that format specifier does not allow, for example spell out. You actually can do that, you may have two arguments and base your `.stringsdict` plural rules on the first one while inserting second one, like this:
 
 ``` xml
@@ -464,7 +464,7 @@ Yeah that's the option, but you should be extremely careful with this technique.
 ----------
 
 
-###Resources with lots of more info
+### Resources with lots of more info
 If you are looking for some deeper insight on the topic, here are some relevant sources I find appropriate:
 
  - [Apple's umbrella page with links to different internationalization info (including WWDC sessions)](https://developer.apple.com/internationalization/) 

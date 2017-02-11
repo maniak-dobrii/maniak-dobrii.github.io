@@ -57,7 +57,7 @@ markdown: kramdown
 kramdown:
    input: GFM
    hard_wrap: false
-highlighter: pygments
+highlighter: rouge
 permalink: /:title/
 
 # The release of Jekyll Now that you're using

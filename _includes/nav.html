@@ -1,4 +1,4 @@
-            {% comment %} There are three possible nav_id values: "posts", "bad" and "about" {% endcomment %}
+            {% comment %} There are two possible nav_id values: "posts" and "about" {% endcomment %}
 
             {% comment %} // By default nav_id is posts {% endcomment %}
             {% assign nav_id = "posts" %}
@@ -6,10 +6,4 @@
             {% comment %} // about {% endcomment %}
             {% if page.path == "about.html" %}
                 {% assign nav_id = "about" %}
-            {% endif %}
-
-            {% comment %} // bad {% endcomment %}
-            {% capture truncatedPath %}{{ page.path | truncate: 4, '' }}{% endcapture %}
-            {% if truncatedPath == "bad/" %}
-                {% assign nav_id = "bad" %}
             {% endif %}

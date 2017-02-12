@@ -3,7 +3,23 @@ layout: default
 ---
 
 <article class="post">
+
+    {% if page.title %}
+                <div class="full_post_header">
+                  <span class="full_post_header_bracets no-left-margin">title{</span>
+                  <span class="full_post_header_topic"> {{ page.title }}</span>
+                  <span class="full_post_header_bracets valign-bottom">}</span>
+                </div>
+
+                <div class="full_post_datetime">
+                  <img src="{{ site.baseurl }}/img/date.gif" style="margin-right: 0.2em;" /> {{ page.date | date: "%B %e, %Y" }} 
+                </div>
+                <div class="full_post_content">
+    {% endif %}
+
+
   <h1 style="line-height:1;">{{ page.title }}<br/>
+
       <span style="font-size:0.5em;color:rgb(120, 120, 120);">{{ page.date | date: "%B&nbsp;%e,&nbsp;%Y" }}</span></h1>
 
   <div class="entry">

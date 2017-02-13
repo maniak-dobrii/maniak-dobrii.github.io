@@ -14,7 +14,7 @@
     <div class="top-stripe"></div>    
     <div id="wrapper"> <!-- wrapper  -->
       <header class="header clearfix">
-        <a href="{{ site.baseurl }}/" id="logo">MANIAK_dobrii</a>
+        <a href="{{ site.baseurl }}/" id="logo" class="{% if page.is_post %}logo_post{% else %}logo_main{% endif %}">MANIAK_dobrii</a>
 
         <nav>
           {% include nav.html %}
@@ -25,6 +25,7 @@
 
 
       <main id="main" role="main">
+        <span class="{% if page.is_post %}logo_post{% else %}logo_main{% endif %}">power in confidence</span>
         {{ content }}
       </main>
     </div> <!-- ENDOF wrapper -->

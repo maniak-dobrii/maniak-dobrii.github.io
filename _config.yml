@@ -79,3 +79,13 @@ exclude:
     - README.md
     - CNAME
     - serve.sh
+
+
+# Add variables for posts
+defaults:
+  -
+    scope:
+      path: ""      # empty string for all files
+      type: posts   # limit to posts
+    values:
+      is_post: true # automatically set is_post=true for all posts

@@ -18,14 +18,14 @@
 
         <nav>
           {% include nav.html %}
-          <a href="{{ site.baseurl }}/" {% if nav_id == "posts" %} class="selected" {% endif %}>posts</a>
-          <a href="{{ site.baseurl }}/about" {% if nav_id == "about" %} class="selected" {% endif %}>about</a>
+          <a href="{{ site.baseurl }}/" {% if posts_nav_class != nil %} class="{{ posts_nav_class }}" {% endif %}>posts</a>
+          <a href="{{ site.baseurl }}/about" {% if about_nav_class != nil %} class="{{ about_nav_class }}" {% endif %}>about</a>
         </nav>
       </header>
 
 
       <main id="main" role="main">
-        <span class="{% if page.is_post %}logo_post{% else %}logo_main{% endif %}">power in confidence</span>
+        <span class="{% if page.is_post %}logo_post{% else %}logo_main{% endif %}">Misha Solodovnichenko</span>
         {{ content }}
       </main>
     </div> <!-- ENDOF wrapper -->

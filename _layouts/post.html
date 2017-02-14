@@ -3,18 +3,20 @@ layout: default
 ---
 
 <article class="post">
-  <h1 style="line-height:1;">{{ page.title }}<br/>
 
-      <span style="font-size:0.5em;color:rgb(120, 120, 120);">{{ page.date | date: "%B&nbsp;%e,&nbsp;%Y" }}</span></h1>
+  <h1>{{ page.title }}</h1>
+
+  <div class="date">
+    <span style="color:rgb(120, 120, 120);">{{ page.date | date: "%B&nbsp;%e,&nbsp;%Y" }}</span>
+  </div>
+      
 
   <div class="entry">
     {{ content }}
   </div>
 
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }} by MANIAK_dobrii
-  </div>
-
-  <div class="comments_dash">comments</div>
+  <div class="comments-dash">comments</div>
+  <div class="full-width-dash">&nbsp;</div>
+  
   {% include disqus.html %}
 </article>

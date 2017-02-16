@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <div class="top-stripe"></div>    
+    <div class="{% if page.is_post %}top-stripe-post{% else %}top-stripe{% endif %}"></div>    
     <div id="wrapper"> <!-- wrapper  -->
       <header class="header clearfix">
         <a href="{{ site.baseurl }}/" id="logo" class="{% if page.is_post %}logo_post{% else %}logo_main{% endif %}">MANIAK_dobrii</a>

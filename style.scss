@@ -165,6 +165,12 @@ img {
     background-color: #3c9f45;
 }
 
+.top-stripe-post {
+  @extend .top-stripe;
+
+  background-color: #ababab;
+}
+
 #logo {
   font-size: 2em;
   font-family: Tahoma;

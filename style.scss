@@ -233,7 +233,7 @@ nav {
 ------------------------------------------------------------------- */
 main {
   width: 100%;
-  padding: 0 0 100px;
+  padding: 0 0 120px;
   height: 1%;
   position: relative;
 }
@@ -362,10 +362,20 @@ tr, td, th, tb {
 /* Footer
 ------------------------------------------------------------------- */
 footer {       
-  min-width: $minWi;
-  max-width: $maxWi;
+  width: 100%;
+
   margin: -100px auto 0;
   height: 100px;
+
+  background-color: #fafafa;
+  border-top: 1px solid #ebebeb;
+
+  .footer-content {
+    min-width: $minWi;
+    max-width: $maxWi;   
+
+    margin: 0 auto;
+  }
 }
 
 #the_hole {
@@ -374,7 +384,7 @@ footer {
 
   float: left;
 
-  background-image: url('{{ site.baseurl }}/images/hole.gif');
+  background-image: url('{{ site.baseurl }}/images/hole.png');
 }
 
 .copyrights {
@@ -388,7 +398,7 @@ footer {
   font-family: Arial, Tahoma;
   font-size: 28px;
   color: #e8e7e8;
-  margin: 0 4px;
+  margin: 0 0.5em 0 4px;
 }
 
 

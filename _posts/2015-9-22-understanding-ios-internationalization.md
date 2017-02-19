@@ -5,6 +5,13 @@ title: Understanding iOS internationalization
 
 I assume reader is already familiar with basic internationalization facilities and approaches used in iOS apps development. The distinctions and details I cover in this article were a bit confusing for me when I first started introducing internationalization in my apps, so I decided to wrap it up for myself and any curious developer.
 
+### Table of contents
+{: .no_toc}
+* TOC
+{:toc}
+
+### Let's look at the settings
+Here's "Language & Region" settings screen in iOS 9, I have separated it in to parts with the red line:
 ![Language & Region preferences iOS 9]({{ site.baseurl }}/images/posts/understanding-ios-internationalization/Language_and_region_iOS9.png)
 
 Let's inspect iOS **Language & Region** settings, parameters we're interested in: 
@@ -408,7 +415,7 @@ It's not about whether use them or not, but about what to supply. The rule of th
 ### I'll add internationalization later
 If your app supports only single language it could be tempting to hardcode the locale or even don't use the internationalization APIs at all. This could seem a time-saver and all-the-things-simplifier, but the time saved does not worth it and, actually, this usually takes more time if internationalization APIs were not used from the day 0. Even if you're not planning to support multiple languages, separating text from code is a significant thing to do. I don't suggest to go crazy and, say, always support RTL UI in a flashlight app,  you (or your product owner) should just be reasonable and decide based on your target auditory not if at all but at how much you should introduce internationalization APIs in your app. At least use `NSLocalizedString` so you could extract and provide your .strings to your editors in minutes and, after that, update all the text in the app by the means of just replacing the files.  
 
-### When should I not use currentLocale
+### When should I not use currentLocale?
 Most of the time if you are to supply an NSLocale instance somewhere it should be obtained rather via `+[NSLocale currentLocale]` or `+[NSLocale autoupdatingCurrentLocale]`. But there are cases when you better not.  One of such examples is when you use `NSNumberFormatterSpellOutStyle` with `NSNumberFormatter`. Your app runs in some language, thus .strings files are from according `.lproj` dir in some language. Here you better use locale based on the language app is running.
 The main thing is that you should always think and not blindly supply `currentLocale` everywhere you see `NSLocale` argument.
 

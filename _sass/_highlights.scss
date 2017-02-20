@@ -1,13 +1,31 @@
 
 .highlight {
   background-color: #efefef;
-  padding: 7px 7px 7px 10px;
-  border: 1px solid #ddd;
-  -moz-box-shadow: 3px 3px rgba(0,0,0,0.1);
-  -webkit-box-shadow: 3px 3px rgba(0,0,0,0.1);
-  box-shadow: 3px 3px rgba(0,0,0,0.1);
   margin: 20px 0 20px 0;
   overflow: scroll;
+
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;  
+
+  text-align: center;
+}
+
+pre {
+  code {
+    margin: 0 auto;
+    white-space: pre;
+    display: inline-block;
+    min-width: 800px;
+    max-width: 100vw;
+
+    text-align: left;
+
+    background-color: transparent;
+  }
 }
 
 code {
@@ -17,9 +35,6 @@ code {
     padding: 2px 4px;
 }
 
-pre code,pre.prettyprint code {
-  background-color:transparent !important;
-}
 
 .highlight .c { color: #586E75 } /* Comment */
 .highlight .err { color: #93A1A1 } /* Error */

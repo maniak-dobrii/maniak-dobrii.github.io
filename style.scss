@@ -255,7 +255,7 @@ main {
 
   blockquote {
     border-left: 1em solid #3c9f45;
-    padding: 0.1em 1em;
+    padding: 0.1em 0 0.1em 1em;
     color: #252525;
     font-size: 22px;
 
@@ -289,6 +289,10 @@ main {
   h1 {
     line-height: 1.2;
     margin-bottom: 0;
+  }
+
+  p {
+    text-align:justify;
   }
 }
 

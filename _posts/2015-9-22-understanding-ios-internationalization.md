@@ -5,8 +5,8 @@ title: Understanding iOS internationalization
 
 I assume reader is already familiar with basic internationalization facilities and approaches used in iOS apps development. The distinctions and details I cover in this article were a bit confusing for me when I first started introducing internationalization in my apps, so I decided to wrap it up for myself and any curious developer.
 
-### Table of contents
-{: .no_toc}
+It's a long read, but it's not necessary to read it all at once, you can hop to the interesting section via the links below:
+
 * TOC
 {:toc}
 
@@ -79,7 +79,7 @@ Locale is used when formatting locale-sensitive data like numbers, dates and nam
 
 `Locale ID` may include different components, which override different preferences, for example, to override calendar to the Buddhist you may add `calendar` component like this: `en_US@calendar=buddhist`. 
 
-###Preferred languages vs preferred localizations
+### Preferred languages vs preferred localizations
 Both of these are ordered lists of `language ID`s. **Preferred languages** is the list of languages user prefers, you can see it in the settings: 
 
 ![Language & Region preferences iOS 9]({{ site.baseurl }}/images/posts/understanding-ios-internationalization/Preferred_languages_af_en.png)

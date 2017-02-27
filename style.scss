@@ -162,7 +162,7 @@ img {
     width: 100%;
     height: $topStripeHe;
 
-    background-color: #3c9f45;
+    background-color: $mdGreen;
 }
 
 .top-stripe-post {
@@ -213,7 +213,7 @@ nav {
   }
 
   .selected {
-    background-color: #3c9f45;
+    background-color: $mdGreen;
     color: white;
     text-decoration: none;
   }
@@ -372,6 +372,13 @@ tr, td, th, tb {
     line-height: 1.3em;
 
     font-family: verdana;
+}
+
+#markdown-toc {
+    list-style-type: none;
+    border-left: 0.2em solid $mdGreen;
+    padding-left: 0.8em;
+    line-height: 1.5em;
 }
 
 /* Footer

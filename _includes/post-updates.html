@@ -1,7 +1,6 @@
 {% comment %} This requires "updates" variable (array of {"date", "msg"} objects) to be set via include  {% endcomment %}
 {% if include.updates %}
 <div id="updates">
-  <span class="updates-meta">updates:</span>
   <table>
     <tbody>
 {% for update in include.updates %}

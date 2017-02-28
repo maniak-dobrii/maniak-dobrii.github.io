@@ -4,27 +4,15 @@ layout: default
 
 <div class="posts">
   {% for post in site.posts %}
+    <article class="post">
 
-    {% assign excluded_category = 'bad' %}
-    {% assign is_excluded_category_present = false %}
+      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><br/></h1>
+      {% include post-dates.html date_added=post.date date_updated=post.update_date %}
 
-    {% for category in post.categories %}
-      {% if category == excluded_category %}
-        {% assign is_excluded_category_present = true %}
-      {% endif %}
-    {% endfor %}
+      <div class="entry">
+        {{ post.excerpt }}
+      </div>
 
-    {% if is_excluded_category_present == false %}
-      <article class="post">
-
-        <h1 style="line-height:1;"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><br/>
-        <span style="font-size:0.5em;color:rgb(120, 120, 120);">{{ post.date | date: "%B&nbsp;%e,&nbsp;%Y" }}</span></h1>
-
-        <div class="entry">
-          {{ post.excerpt }}
-        </div>
-
-      </article>
-    {% endif %}
+    </article>
   {% endfor %}
 </div>

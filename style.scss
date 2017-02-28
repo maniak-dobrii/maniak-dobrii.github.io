@@ -249,6 +249,12 @@ main {
   border-bottom: none;
 }
 
+.posts {
+  p {
+    margin: 0.5em 0;
+  }
+}
+
 .post {
   a:hover {
     text-decoration: underline;
@@ -294,6 +300,32 @@ main {
 
   p {
     text-align:justify;
+  }
+}
+
+#updates {
+  margin: 0 0 0.5em 0;
+
+  .updates-meta {
+    @extend .dull-meta-color;
+  }
+
+  table, tr, td, th, tb {
+    border: none;
+    text-align: left;
+    border-collapse: collapse;
+  }
+
+  td.update-date {
+    @extend .vivid-meta-color;
+    white-space: nowrap;
+    padding: 0;
+  }
+
+  td.update-msg {
+    @extend .dull-meta-color;
+    width: 99%;
+    padding: 0 1em;
   }
 }
 
@@ -446,6 +478,14 @@ footer {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+}
+
+.dull-meta-color {
+  color: $dullMetaColor;
+}
+
+.vivid-meta-color {
+  color: $vividMetaColor;
 }
 
 

@@ -6,12 +6,10 @@ layout: default
 
   <h1>{{ page.title }}</h1>
 
-  <div class="date">
-    <span style="color:rgb(120, 120, 120);">added <span style="color:#3d3d3d;">{{ page.date | date: "%e.%b.%Y" | downcase }}</span>{% if page.update_date %}, updated <span style="color:#3d3d3d;">{{ page.update_date | date: "%e.%b.%Y" | downcase }}</span>{% endif %}</span>
-  </div>
-      
+  {% include post-dates.html date_added=page.date date_updated=page.update_date %}
 
   <div class="entry">
+    {% include post-updates.html updates=page.updates %}
     {{ content }}
   </div>
 

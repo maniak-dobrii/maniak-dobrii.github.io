@@ -1,0 +1,15 @@
+{% comment %} This requires "updates" variable (array of {"date", "msg"} objects) to be set via include  {% endcomment %}
+{% if include.updates %}
+<div id="updates">
+  <span class="updates-meta">updates:</span>
+  <table>
+    <tbody>
+{% for update in include.updates %}
+      <tr>
+        <td class="update-date">{% include f-format-date.html date=update.date %}</td> <td class="update-msg">{{ update.msg }}</td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}

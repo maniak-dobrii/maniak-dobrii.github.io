@@ -2,6 +2,11 @@
 layout: post
 title: Understanding iOS internationalization
 update_date: 2017-02-27T18:07:35+04:00
+updates:
+  - date: 2017-02-27T19:35:33+04:00
+    msg: "Stuff update, blah blah blah"
+  - date: 2017-02-27T19:46:12+04:00
+    msg: "Stuff update, blah blah blah"
 ---
 
 I assume reader is already familiar with basic internationalization facilities and approaches used in iOS apps development. The distinctions and details I cover in this article were a bit confusing for me when I first started introducing internationalization in my apps, so I decided to wrap it up for myself and any curious developer.

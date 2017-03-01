@@ -182,7 +182,7 @@ img {
 .top-stripe-post {
   @extend .top-stripe;
 
-  background-color: #ababab;
+  background-color: $inactiveHeaderColor;
 }
 
 #logo {
@@ -204,7 +204,7 @@ img {
 }
 
 .logo_post {
-  color: #ababab;
+  color: $inactiveHeaderColor;
 }
 
 .logo_main {
@@ -268,13 +268,13 @@ nav {
   }
 
   .selected_post {
-    background-color: #ababab;
+    background-color: $inactiveHeaderColor;
     color: white;
     text-decoration: none; 
   }
 
   .post {
-    color: #ababab;
+    color: $inactiveHeaderColor;
   }
 }
 
@@ -320,7 +320,7 @@ main {
 
     width: 100%;
 
-    background-color: #ffffff;
+    background-color: $white;
     background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23888888' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
   }
 

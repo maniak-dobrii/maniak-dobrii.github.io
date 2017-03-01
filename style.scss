@@ -114,19 +114,6 @@ img {
   max-width: none;
 }
 
-.date {
-
-}
-
-// Specify the color of the selection
-::-moz-selection {
-  color: $black;
-  background: $lightGray;
-}
-::selection {
-  color: $black;
-  background: $lightGray;
-}
 
 // Nicolas Gallagher's micro clearfix hack
 // http://nicolasgallagher.com/micro-clearfix-hack/
@@ -359,6 +346,10 @@ main {
 
     @include word-wrap;
   }
+}
+
+.date {
+
 }
 
 #updates {

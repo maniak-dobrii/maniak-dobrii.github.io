@@ -116,9 +116,10 @@ NSLocale *locale = [NSLocale currentLocale];
 NSString *format = @"Number of items: %zd";
 NSInteger numberOfItems = 42;
 
- NSString *string = [[NSString alloc] initWithFormat:format locale:locale, numberOfItems];
+NSString *string = 
+  [[NSString alloc] initWithFormat:format locale:locale, numberOfItems];
  
- NSLog(@"string = '%@' for locale %@", string locale.localeIdentifier);
+NSLog(@"string = '%@' for locale %@", string, locale.localeIdentifier);
 ```
 
 I wondered about how does it transform from NSInteger to NSString and inserts it instead of the format specifier, so I digged in with [Hopper](http://hopperapp.com/) and got that it uses `CFNumberFormatter`. It uses core foundation's `CFNumberFormatter` in `__CFStringFormatLocalizedNumber` called from `___CFStringAppendFormatCore`. This means you can't change formatter or configure it somehow (only via format specifier configuration like `"%.6f"`). You actually can cheat and format number yourself, but it gets tricky with pluralization, see corresponding section below for details.
@@ -169,7 +170,9 @@ So, you might think that `NSLocalizedString` takes `42`, goes through the `.stri
 Ok, I'll rewrite this (and this will still work):
 
 ``` objc
-NSString *format = NSLocalizedString(@"format_key", nil); // no 42 anywhere in parameters
+// no 42 anywhere in parameters
+NSString *format = NSLocalizedString(@"format_key", nil);
+
 [NSString localizedStringWithFormat:format, 42];
 ```
 
@@ -212,60 +215,79 @@ And this is really messed up in iOS 9, take this code, for example:
 
 <!-- language: lang-objc -->
 ``` objc
-NSLog(@"[[NSBundle mainBundle] preferredLocalizations] = %@", [[NSBundle mainBundle] preferredLocalizations]); // language app is running in
-NSLog(@"[NSLocale currentLocale].localeIdentifier = %@", [NSLocale currentLocale].localeIdentifier); // regional conventions
-NSString *format = NSLocalizedString(@"format_key", nil); // as in example above
+ // language app is running in
+NSLog(@"[[NSBundle mainBundle] preferredLocalizations] = %@", 
+  [[NSBundle mainBundle] preferredLocalizations]);
 
-NSUInteger numForMany = 5; // it should be mapped to "many" in Russian(ru) and "other" in English(en)
+// regional conventions
+NSLog(@"[NSLocale currentLocale].localeIdentifier = %@", 
+  [NSLocale currentLocale].localeIdentifier);
+
+// as in example above
+NSString *format = NSLocalizedString(@"format_key", nil);
+
+// it should be mapped to "many" in Russian(ru) and "other" in English(en)
+NSUInteger numForMany = 5;
 
 // ru
 NSLocale *ruLocale = [NSLocale localeWithLocaleIdentifier:@"ru"];
-NSString *ruResult = [[NSString alloc] initWithFormat:format locale:ruLocale, numForMany];
+NSString *ruResult = 
+  [[NSString alloc] initWithFormat:format locale:ruLocale, numForMany];
 NSLog(@"%@ for %lu: %@", ruLocale.localeIdentifier, numForMany, ruResult);
 
 // en
 NSLocale *enLocale = [NSLocale localeWithLocaleIdentifier:@"en"];
-NSString *enResult = [[NSString alloc] initWithFormat:format locale:enLocale, numForMany];
+NSString *enResult = 
+  [[NSString alloc] initWithFormat:format locale:enLocale, numForMany];
 NSLog(@"%@ for %lu: %@", enLocale.localeIdentifier, numForMany, enResult);
 
 // currentLocale
 NSLocale *currentLocale = [NSLocale currentLocale];
-NSString *currentLocaleResult = [[NSString alloc] initWithFormat:format locale:currentLocale, numForMany];
-NSLog(@"%@ (currentLocale) for %lu: %@", currentLocale.localeIdentifier, numForMany, currentLocaleResult);
+NSString *currentLocaleResult = 
+  [[NSString alloc] initWithFormat:format locale:currentLocale, numForMany];
+NSLog(@"%@ (currentLocale) for %lu: %@", 
+  currentLocale.localeIdentifier, numForMany, currentLocaleResult);
 ```
 
 And that what it outputs with language set to Russian, while regional settings are all set to english. So that `currentLocale` return `en_US` while preferred localization (the language app is running in) would be `ru`:
 
 ```
 // iOS 8
-2015-09-21 12:56:00.245 LocalizationTests[99346:9581633] [[NSBundle mainBundle] preferredLocalizations] = (
+> [[NSBundle mainBundle] preferredLocalizations] = (
     ru
 )
-2015-09-21 12:56:00.271 LocalizationTests[99346:9581633] [NSLocale currentLocale].localeIdentifier = en_US
-2015-09-21 12:56:00.272 LocalizationTests[99346:9581633] ru for 5: MANY
-2015-09-21 12:56:00.272 LocalizationTests[99346:9581633] en for 5: MANY
-2015-09-21 12:56:00.272 LocalizationTests[99346:9581633] en_US (currentLocale) for 5: MANY
+> [NSLocale currentLocale].localeIdentifier = en_US
+> ru for 5: MANY
+> en for 5: MANY
+> en_US (currentLocale) for 5: MANY
 ```
 
 That's good, it uses correct plural rules for the `.stringsdict`, which **contains strings in Russian for Russian plural forms**. No matter which NSLocale I provide, it uses correct plural rules and formats numbers according to settings from NSLocale.
 
 ```
 // iOS 9
-2015-09-21 13:00:31.472 LocalizationTests[99610:9610901] [[NSBundle mainBundle] preferredLocalizations] = (
+> [[NSBundle mainBundle] preferredLocalizations] = (
     ru
 )
-2015-09-21 13:00:31.776 LocalizationTests[99610:9610901] [NSLocale currentLocale].localeIdentifier = en_US
-2015-09-21 13:00:31.785 LocalizationTests[99610:9610901] ru for 5: MANY
-2015-09-21 13:00:31.785 LocalizationTests[99610:9610901] en for 5: OTHER
-2015-09-21 13:00:31.785 LocalizationTests[99610:9610901] en_US (currentLocale) for 5: OTHER
+> [NSLocale currentLocale].localeIdentifier = en_US
+> ru for 5: MANY
+> en for 5: OTHER
+> en_US (currentLocale) for 5: OTHER
 ```
 
 You see? In iOS 9 it uses given locale to get plural rules for! It would use different plural rules depending on given NSLocale instance while loading the same resource in a single language. At first, WTF? It breaks the concept of two different settings - language and regional conventions. At second it breaks existing codebases. So, if you compile against iOS SDK 9.0+ and user sets different region you'll end up with wrong text. So now, to fix that you can instead of `currentLocale` supply locale based on preferred language:
 
 <!-- language: lang-objc -->
 ``` objc
-NSLocale *prefferedLanguageLocale = [NSLocale localeWithLocaleIdentifier:[[[NSBundle mainBundle] preferredLocalizations] firstObject]];
-NSString *result = [[NSString alloc] initWithFormat:format locale:prefferedLanguageLocale, numForMany];
+NSString *preferredLanguage = 
+  [[[NSBundle mainBundle] preferredLocalizations] firstObject];
+
+NSLocale *preferedLanguageLocale = 
+  [NSLocale localeWithLocaleIdentifier:preferredLanguage];
+
+NSString *result = 
+  [[NSString alloc] initWithFormat:format 
+                            locale:prefferedLanguageLocale, numForMany];
 ```
 
 Note, that you're not using `currentLocale`, thus, even though you'll get correct plural rules, you won't obey to user's regional preferences. You could try to to workaround this by composing locale using components (like @calendar=gregorian), ask everything you could from `currentLocale` and inject it as components to `prefferedLanguageLocale`, but I'm not sure that could even work and you won't miss something. I've submitted [rdar://22804555](rdar://22804555) about that.
@@ -277,10 +299,15 @@ While I was digging CoreFoundation with [Hopper](http://hopperapp.com/) I found 
 
 <!-- language: lang-objc -->
 ``` objc
-NSString *format = NSLocalizedString... // __NSLocalizedString from .stringsdict
-NSDictionary *configuration = [format valueForKey:@"config"]; // __NSLocalizedString.config
+// __NSLocalizedString from .stringsdict
+NSString *format = NSLocalizedString...
+// __NSLocalizedString.config
+NSDictionary *configuration = [format valueForKey:@"config"];
 NSMutableDictionary *mutableConfig = [configuration mutableCopy];
-[mutableConfig setObject:[NSLocale localeWithLocaleIdentifier:@"en_US"] forKey:@"NSStringFormatLocaleKey"]; // force plural rules locale
+
+// force plural rules locale
+[mutableConfig setObject:[NSLocale localeWithLocaleIdentifier:@"en_US"] 
+                  forKey:@"NSStringFormatLocaleKey"];
 [format setValue:mutableConfig forKey:@"config"];
 ```
 
@@ -373,9 +400,11 @@ Localized.strings
 ...
 /* First error text */
 "Error occurred"="Error occurred";
+      ^
 
 /* Second error text */
-"Error occurred"="Error occurred"; /* -- nope, you can't have two identical keys in the same file */
+"Error occurred"="Error occurred";
+      ^ nope, you can't have two identical keys in the same file
 ```
 
 You'll rather have to use tables, i.e. store parts of strings in different files (which I really suggest to do, but not for the case), or, something else, maybe in code.
@@ -413,7 +442,9 @@ Use them. Really, they are crucial. They provide the most context you actually c
 ``` objc
 // never do that, localizers won't understand what's that about
 // you won't remember what was that about in a month
-label.text = NSLocalizedString(@"Text in my language", nil); // where are the comments?
+
+// where are the comments?
+label.text = NSLocalizedString(@"Text in my language", nil);
 ```
 
 It's not about whether use them or not, but about what to supply. The rule of thumb for me is to provide all the information needed for localizers to understand what that string is about by only using the `.strings` file itself. That means that localizers should be able to translate your strings having only the .strings files you provide, they even might not have the app. And this really happens, often localizers are just only given the strings files to translate.
@@ -456,7 +487,8 @@ NSUInteger number = 42;
 NSString *format = NSLocalizedString(@"custom_format", nil);
 
 // spell out number formatter uses language from locale
-NSString *preferredLanguage = [[[NSBundle mainBundle] preferredLocalizations] firstObject];
+NSString *preferredLanguage = 
+  [[[NSBundle mainBundle] preferredLocalizations] firstObject];
 NSLocale *locale = [NSLocale localeWithLocaleIdentifier:preferredLanguage];
 
 // configuring number formatter

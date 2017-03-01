@@ -36,7 +36,8 @@ for(NSString *languageID in preferredLanguages)
     // get language designator
     NSString *languageDesignator = components[NSLocaleLanguageCode];
 
-    if(languageDesignator != nil) // it will never be nil for a valid language-id, but i'm paranoid
+    // it will never be nil for a valid language-id, but i'm paranoid
+    if(languageDesignator != nil)
     {
         [extractedLanguageDesignators addObject:languageDesignator];
     }
@@ -88,7 +89,9 @@ Last one is what you wanted, right? Wrong. Last one is a list of language design
 
 <!-- language: lang-objc -->
 ``` objc
-NSLog(@"zh-Hans-US components: %@", [NSLocale componentsFromLocaleIdentifier:@"zh-Hans-US"]);
+NSLog(@"zh-Hans-US components: %@", 
+  [NSLocale componentsFromLocaleIdentifier:@"zh-Hans-US"]);
+
 //  zh-Hans-US components: {
 //    kCFLocaleCountryCodeKey = US;
 //    kCFLocaleLanguageCodeKey = zh;

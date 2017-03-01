@@ -68,11 +68,11 @@ p {
 }
 
 a {
-  color: $blue;
+  color: $linkBlue;
   text-decoration: none;
 	cursor: pointer;
   &:hover, &:active {
-    color: $blue;
+    color: $linkBlue;
   }
 }
 
@@ -436,44 +436,6 @@ tr, td, th, tb {
   height: 2px;
   border-bottom: #878787 2px dashed;
   margin-bottom: 1em;
-}
-
-/*
-    -----------------------------
-    full post view
-    -----------------------------
-*/
-
-.full_post_header
-{
-    width: 100%;
-    background-color: #f4fff4;
-
-    padding: 0 0.2em 0.5em 0.2em;
- 
-    font-family: Arial, Tahoma, Verdana, sans-serif;   
-    font-weight: 600;
-    font-size: 1.5em;
-
-    color: #434443;
-
-    margin-top: 0.5em;
-}
-
-.full_post_header_bracets
-{
-    color: #b3dab7;
-    margin: 0;
-    font-size: 3em;
-    font-weight: 500;
-}
-
-.full_post_header_topic
-{
-    margin: 0 0.2em;
-    line-height: 1.3em;
-
-    font-family: verdana;
 }
 
 #markdown-toc {

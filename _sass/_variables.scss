@@ -4,7 +4,7 @@
 //
 
 // Colors
-$blue: #4183C4;
+$linkBlue: #4183C4;
 $mdGreen: #3c9f45;
 
 // Post title portion colors
@@ -29,7 +29,6 @@ $mobileHorisontalPadding: 1em;
 // Font stacks
 $helvetica: -apple-system, Helvetica, Arial, sans-serif;
 $helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$georgia: Georgia, serif;
 
 // Mobile breakpoints
 @mixin mobile {

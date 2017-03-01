@@ -389,6 +389,39 @@ main {
   }
 }
 
+.post-note {
+  display: block;
+  position: relative;
+
+  float: right;
+  padding: 10px;
+  border: 1px dashed $mdGreen;
+  border-radius: 4px;
+  margin: 0 0 18px 2em;
+  
+  max-width: 40%;
+  
+  background-color: #fbfffb;
+
+  @include mobile {
+    margin: 18px 0;
+    max-width: 100%;
+    float: none;
+  }
+}
+
+.post-note:before {
+  content: "";
+  display: inline-block;
+  width: 25px;
+  height: 18px;
+  background-image: url("images/note-smiley.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -18px;
+}
+
+
 // single line hr
 hr {
   border: 0;

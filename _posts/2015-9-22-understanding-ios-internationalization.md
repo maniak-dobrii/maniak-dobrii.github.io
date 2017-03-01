@@ -9,7 +9,8 @@ updates:
 
 I assume reader is already familiar with basic internationalization facilities and approaches used in iOS apps development. The distinctions and details I cover in this article were a bit confusing for me when I first started introducing internationalization in my apps, so I decided to wrap it up for myself and any curious developer.
 
-It's a long read, but it's not necessary to read it all at once, you can hop to the interesting section via the links below:
+It's a long read, but it's not necessary to read it all at once.
+{: class="post-note" }
 
 * TOC
 {:toc}

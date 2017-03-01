@@ -21,9 +21,10 @@ To work around this issue or make some fast fixes you may use `+componentsFromLo
 
 <!-- language: lang-objc -->
 ``` objc
+NSString *currentLocaleID = [NSLocale currentLocale].localeIdentifier;
 NSArray *preferredLanguages = [NSLocale preferredLanguages];
 
-NSLog(@"[NSLocale currentLocale] = %@", [NSLocale currentLocale].localeIdentifier);
+NSLog(@"[NSLocale currentLocale] = %@", currentLocaleID);
 NSLog(@"[NSLocale preferredLanguages] = %@", preferredLanguages);
 
 // extracted language designators will go here
@@ -32,7 +33,8 @@ NSMutableArray *extractedLanguageDesignators = [NSMutableArray array];
 for(NSString *languageID in preferredLanguages)
 {
     // extract components
-    NSDictionary *components = [NSLocale componentsFromLocaleIdentifier:languageID];
+    NSDictionary *components = 
+      [NSLocale componentsFromLocaleIdentifier:languageID];
     // get language designator
     NSString *languageDesignator = components[NSLocaleLanguageCode];
 

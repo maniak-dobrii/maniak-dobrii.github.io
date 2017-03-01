@@ -1,6 +1,6 @@
 
 .highlight {
-  background-color: #efefef;
+  background-color: #eff7ef;
   margin: 20px 0 20px 0;
   overflow: auto;
 
@@ -13,6 +13,15 @@
   margin-right: -50vw;  
 
   text-align: center;
+
+  @include mobile {
+    width: 100%;
+    max-width: 100%;
+    left: auto;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 pre {
@@ -26,14 +35,22 @@ pre {
     text-align: left;
 
     background-color: transparent;
+
+    @include mobile {
+      margin: 0;
+      min-width: 100%;
+      max-width: 100%;
+      width: 100%;
+    }
   }
 }
 
 code {
   font-family:'Bitstream Vera Sans Mono','Courier', monospace;
-    background-color:rgba(128,128,128, 0.1);
-    border-radius: 4px;
-    padding: 2px 4px;
+  background-color:rgba(128,128,128, 0.1);
+  border-radius: 4px;
+  padding: 2px 4px;
+  overflow: auto;
 }
 
 

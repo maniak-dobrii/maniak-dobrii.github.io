@@ -39,6 +39,8 @@ h1, h2, h3, h4, h5, h6 {
   @include mobile {
     line-height: 1.4;
   }
+
+  @include word-wrap;
 }
 
 h1 {
@@ -154,6 +156,17 @@ img {
   /* This is required to include the top stripe */
   padding-top: $topStripeHe;
   margin-top: -$topStripeHe;
+
+  @include mobile {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+
+    margin: -$topStripeHe 0 0 0;
+
+    padding-left: $mobileHorisontalPadding;
+    padding-right: $mobileHorisontalPadding;
+  }
 }
 
 
@@ -174,9 +187,16 @@ img {
 
 #logo {
   font-size: 2em;
-  font-family: Tahoma;
+  font-family: Tahoma, $helvetica;
   font-weight: 600;
   text-decoration: none;
+
+  @include mobile {
+    display: inline-block;
+    width: 100%;
+
+    text-align: center;
+  }
 }
 
 #logo:hover {
@@ -191,13 +211,35 @@ img {
   color: black;
 }
 
+.logo_name_post {
+  @extend .logo_post;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.logo_name_main {
+  @extend .logo_main;
+
+  @include mobile {
+    display: none;
+  }
+}
+
 nav {
   float: right;
+
+  @include mobile {
+    width: 100%;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+  }
 
   a {
     font-size: 1.5em;
     line-height: 1.41em;
-    font-family: Tahoma;
+    font-family: Tahoma, $helvetica;
 
     margin-right: 0.2em;
     padding: 0.1em 0.5em;
@@ -205,6 +247,12 @@ nav {
     color: #1e241e;
 
     text-decoration: none;
+
+    @include mobile {
+      text-align: center;
+      flex-grow: 1;
+      -webkit-flex-grow: 1;
+    }
   }
 
   a:hover {
@@ -308,6 +356,8 @@ main {
   p {
     text-align:justify;
     line-height: 1.5;
+
+    @include word-wrap;
   }
 }
 
@@ -322,6 +372,11 @@ main {
   table {
     margin: 0 auto;
     width: 800px;
+
+    @include mobile {
+      margin: 0;
+      width: 100%;
+    }
   }
 
   table, tr, td, th, tb {
@@ -445,12 +500,25 @@ footer {
     height: 100%;
 
     margin: 0 auto;
+
+    @include mobile {
+      padding-left: $mobileHorisontalPadding;
+      padding-right: $mobileHorisontalPadding;
+
+      min-width: 100%;
+      max-width: 100%;
+      width: 100%;
+    }
   }
 }
 
 .copyrights-table-wrapper {
   display: table;
   height: 100%;
+
+  @include mobile {
+    margin: 0 auto;
+  }
 }
 
 .the-hole {
@@ -492,6 +560,14 @@ footer {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+
+  @include mobile {
+    width: 100%;
+    left: auto;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .dull-meta-color {

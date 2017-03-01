@@ -23,6 +23,9 @@ $topStripeHe: 0.3em;
 $maxWi: 800px;
 $minWi: 600px;
 
+// Horisontal padding that is applied to top level elements on mobile
+$mobileHorisontalPadding: 1em;
+
 // Font stacks
 $helvetica: -apple-system, Helvetica, Arial, sans-serif;
 $helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -33,4 +36,16 @@ $georgia: Georgia, serif;
   @media screen and (max-width: 640px) {
     @content;
   }
+}
+
+// Makes long words & urls be wrapped if they exceed container's width
+@mixin word-wrap() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }

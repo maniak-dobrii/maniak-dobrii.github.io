@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Preferred languages and iOS 9
+title: Preferred languages and iOS&nbsp;9
 ---
 
 In iOS 9 Apple introduced some [changes](https://developer.apple.com/library/ios/technotes/tn2418/_index.html#//apple_ref/doc/uid/DTS40016588-CH1-LANGUAGE_IDENTIFIERS_IN_IOS_9) at how NSLocale `+preferredLanguages` returns languages. It returns strings like `en-US`, `ru-RU` instead of `en`, `ru` as it used to. Some (looks like a lot) of developers got confused by that, they reported that behavior as a bug, it even broke some codebases. The sad truth is that if this change breaks your codebase, you used it wrong making false assumptions.
@@ -21,9 +21,10 @@ To work around this issue or make some fast fixes you may use `+componentsFromLo
 
 <!-- language: lang-objc -->
 ``` objc
+NSString *currentLocaleID = [NSLocale currentLocale].localeIdentifier;
 NSArray *preferredLanguages = [NSLocale preferredLanguages];
 
-NSLog(@"[NSLocale currentLocale] = %@", [NSLocale currentLocale].localeIdentifier);
+NSLog(@"[NSLocale currentLocale] = %@", currentLocaleID);
 NSLog(@"[NSLocale preferredLanguages] = %@", preferredLanguages);
 
 // extracted language designators will go here
@@ -32,11 +33,13 @@ NSMutableArray *extractedLanguageDesignators = [NSMutableArray array];
 for(NSString *languageID in preferredLanguages)
 {
     // extract components
-    NSDictionary *components = [NSLocale componentsFromLocaleIdentifier:languageID];
+    NSDictionary *components = 
+      [NSLocale componentsFromLocaleIdentifier:languageID];
     // get language designator
     NSString *languageDesignator = components[NSLocaleLanguageCode];
 
-    if(languageDesignator != nil) // it will never be nil for a valid language-id, but i'm paranoid
+    // it will never be nil for a valid language-id, but i'm paranoid
+    if(languageDesignator != nil)
     {
         [extractedLanguageDesignators addObject:languageDesignator];
     }
@@ -88,7 +91,9 @@ Last one is what you wanted, right? Wrong. Last one is a list of language design
 
 <!-- language: lang-objc -->
 ``` objc
-NSLog(@"zh-Hans-US components: %@", [NSLocale componentsFromLocaleIdentifier:@"zh-Hans-US"]);
+NSLog(@"zh-Hans-US components: %@", 
+  [NSLocale componentsFromLocaleIdentifier:@"zh-Hans-US"]);
+
 //  zh-Hans-US components: {
 //    kCFLocaleCountryCodeKey = US;
 //    kCFLocaleLanguageCodeKey = zh;

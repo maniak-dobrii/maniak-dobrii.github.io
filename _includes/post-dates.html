@@ -1,0 +1,4 @@
+{% comment %} Forms dates info for post, expects "date_added" and "date_updated" arguments {% endcomment %}
+<div class="date">
+	<span class="dull-meta-color">added&nbsp;</span><span class="vivid-meta-color">{% include f-format-date.html date=include.date_added %}</span>{% if include.date_updated %}<span class="dull-meta-color">, updated&nbsp;</span><span class="vivid-meta-color">{% include f-format-date.html date=include.date_updated %}</span>{% endif %}
+</div>

@@ -15,19 +15,16 @@
 
 html {
   font-size: 100%;
+  height: 100%;
+  overflow-x:hidden; /* this fixes unwanted horisontal scroll bars */
 }
 
 body {
 	background: $white;
-  font: 18px/1.4 $helvetica;
+  font: 13pt/1.4 $helvetica;
   color: $darkGray;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 0 10px;
   width: 100%;
+  height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -42,6 +39,8 @@ h1, h2, h3, h4, h5, h6 {
   @include mobile {
     line-height: 1.4;
   }
+
+  @include word-wrap;
 }
 
 h1 {
@@ -69,11 +68,11 @@ p {
 }
 
 a {
-  color: $blue;
+  color: $linkBlue;
   text-decoration: none;
 	cursor: pointer;
   &:hover, &:active {
-    color: $blue;
+    color: $linkBlue;
   }
 }
 
@@ -115,20 +114,6 @@ img {
   max-width: none;
 }
 
-.date {
-  font-style: italic;
-  color: $gray;
-}
-
-// Specify the color of the selection
-::-moz-selection {
-  color: $black;
-  background: $lightGray;
-}
-::selection {
-  color: $black;
-  background: $lightGray;
-}
 
 // Nicolas Gallagher's micro clearfix hack
 // http://nicolasgallagher.com/micro-clearfix-hack/
@@ -146,100 +131,148 @@ img {
 /* LAYOUT / SECTIONS */
 /*********************/
 
-//
-// .masthead
-//
+#wrapper {
+  min-width: $minWi;
+  max-width: $maxWi;
 
-.wrapper-masthead {
-  margin-bottom: 50px;
-}
+  margin: 0 auto;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
 
-.masthead {
-  padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
+  /* This is required to include the top stripe */
+  padding-top: $topStripeHe;
+  margin-top: -$topStripeHe;
 
   @include mobile {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+
+    margin: -$topStripeHe 0 0 0;
+
+    padding-left: $mobileHorisontalPadding;
+    padding-right: $mobileHorisontalPadding;
+  }
+}
+
+
+/* Header
+------------------------------------------------------------------- */
+.top-stripe {
+    width: 100%;
+    height: $topStripeHe;
+
+    background-color: $mdGreen;
+}
+
+.top-stripe-post {
+  @extend .top-stripe;
+
+  background-color: $inactiveHeaderColor;
+}
+
+#logo {
+  font-size: 2em;
+  font-family: Tahoma, $helvetica;
+  font-weight: 600;
+  text-decoration: none;
+
+  @include mobile {
+    display: inline-block;
+    width: 100%;
+
     text-align: center;
   }
 }
 
-.site-avatar {
-  float: left;
-  width: 70px;
-  height: 70px;
-  margin-right: 15px;
-
-  @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
-  }
-
-  img {
-    border-radius: 5px;
-  }
+#logo:hover {
+  color: red;
 }
 
-.site-info {
-  float: left;
+.logo_post {
+  color: $inactiveHeaderColor;
+}
+
+.logo_main {
+  color: black;
+}
+
+.logo_name_post {
+  @extend .logo_post;
 
   @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
+    display: none;
   }
 }
 
-.site-name {
-  margin: 0;
-  color: $darkGray;
-  cursor: pointer;
-  font-family: $helveticaNeue;
-  font-weight: 300;
-  font-size: 28px;
-  letter-spacing: 1px;
-}
-
-.site-description {
-  margin: -5px 0 0 0;
-  color: $gray;
-  font-size: 16px;
+.logo_name_main {
+  @extend .logo_main;
 
   @include mobile {
-    margin: 3px 0;
+    display: none;
   }
 }
 
 nav {
   float: right;
-  margin-top: 23px; // @TODO: Vertically middle align
-  font-family: $helveticaNeue;
-  font-size: 18px;
 
   @include mobile {
-    float: none;
-    margin-top: 9px;
-    display: block;
-    font-size: 16px;
+    width: 100%;
+    display: -webkit-flex; /* Safari */
+    display: flex;
   }
 
   a {
-    margin-left: 20px;
-    color: $darkGray;
-    text-align: right;
-    font-weight: 300;
-    letter-spacing: 1px;
+    font-size: 1.5em;
+    line-height: 1.41em;
+    font-family: Tahoma, $helvetica;
+
+    margin-right: 0.2em;
+    padding: 0.1em 0.5em;
+
+    color: #1e241e;
+
+    text-decoration: none;
 
     @include mobile {
-      margin: 0 10px;
-      color: $blue;
+      text-align: center;
+      flex-grow: 1;
+      -webkit-flex-grow: 1;
     }
+  }
+
+  a:hover {
+    background-color: #88c988;
+    text-decoration: none;
+    color: white;
+  }
+
+  .selected {
+    background-color: $mdGreen;
+    color: white;
+    text-decoration: none;
+  }
+
+  .selected_post {
+    background-color: $inactiveHeaderColor;
+    color: white;
+    text-decoration: none; 
+  }
+
+  .post {
+    color: $inactiveHeaderColor;
   }
 }
 
-//
-// .main
-//
+/* Middle
+------------------------------------------------------------------- */
+main {
+  width: 100%;
+  padding: 0 0 120px;
+  height: 1%;
+  position: relative;
+}
 
 .posts > .post {
   padding-bottom: 2em;
@@ -251,14 +284,31 @@ nav {
   border-bottom: none;
 }
 
+.posts {
+  p {
+    margin: 0.5em 0;
+  }
+}
+
 .post {
+  a:hover {
+    text-decoration: underline;
+  }
+
   blockquote {
-    margin: 1.8em .8em;
-    border-left: 2px solid $gray;
-    padding: 0.1em 1em;
-    color: $gray;
+    border-left: 1em solid #3c9f45;
+    padding: 0.1em 0 0.1em 1em;
+    color: #252525;
     font-size: 22px;
-    font-style: italic;
+
+    margin-top: 1.8em;
+    margin-right: 0.8em;
+    margin-bottom: 1.8em;
+
+    width: 100%;
+
+    background-color: $white;
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23888888' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
   }
 
   img {
@@ -277,7 +327,113 @@ nav {
     text-transform: uppercase;
     font-size: 15px;
   }
+
+  h1 {
+    line-height: 1.2;
+    font-size: 2em;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    line-height: 1.2;
+  }
+
+
+  p {
+    text-align: justify;
+    line-height: 1.5;
+
+    @include word-wrap;
+  }
 }
+
+.entry {
+  a:hover {
+    text-decoration: underline;
+  }
+
+  p {
+    text-align: justify;
+    line-height: 1.5;
+
+    @include word-wrap;
+  }
+}
+
+.date {
+
+}
+
+#updates {
+  @extend .full-width;
+
+  margin: 1em 0;
+  padding: 0.2em 0;
+  font-size: 0.9em;
+  background-color: #f9eacf;
+
+  table {
+    margin: 0 auto;
+    width: 800px;
+
+    @include mobile {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  table, tr, td, th, tb {
+    border: none;
+    text-align: left;
+    border-collapse: collapse;
+  }
+
+  td.update-date {
+    @extend .vivid-meta-color;
+    white-space: nowrap;
+    padding: 0;
+  }
+
+  td.update-msg {
+    @extend .dull-meta-color;
+    width: 99%;
+    padding: 0 1em;
+  }
+}
+
+.post-note {
+  display: block;
+  position: relative;
+
+  float: right;
+  padding: 10px;
+  border: 1px dashed $mdGreen;
+  border-radius: 4px;
+  margin: 0 0 18px 2em;
+  
+  max-width: 40%;
+  
+  background-color: #fbfffb;
+
+  @include mobile {
+    margin: 18px 0;
+    max-width: 100%;
+    float: none;
+  }
+}
+
+.post-note:before {
+  content: "";
+  display: inline-block;
+  width: 25px;
+  height: 18px;
+  background-image: url("images/note-smiley.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -18px;
+}
+
 
 // single line hr
 hr {
@@ -297,19 +453,131 @@ tr, td, th, tb {
   padding: 2px;
 }
 
-.wrapper-footer {
-  margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: $lightGray;
+.comments-dash {
+  display: block;
+  width:100%;
+  height:0.5em;
+  margin: 1.5em 0 0 0;
+  text-align:right;
+  color:#878787;
+  line-height:0.5em;
+  padding:0;
+  font-size:2em;
+  overflow:hidden;
+  font-weight: 600;
 }
 
-footer {
-  padding: 20px 0;
-  text-align: center;
+.full-width-dash {
+  @extend .full-width;
+  display: block;
+  height: 2px;
+  border-bottom: #878787 2px dashed;
+  margin-bottom: 1em;
 }
+
+#markdown-toc {
+    list-style-type: none;
+    border-left: 0.2em solid $mdGreen;
+    padding-left: 0.8em;
+    line-height: 1.5em;
+}
+
+/* Footer
+------------------------------------------------------------------- */
+footer {       
+  width: 100%;
+
+  margin: -100px auto 0;
+  height: 100px;
+
+  background-color: #fafafa;
+  border-top: 1px solid #ebebeb;
+
+  .footer-content {
+    min-width: $minWi;
+    max-width: $maxWi;   
+    height: 100%;
+
+    margin: 0 auto;
+
+    @include mobile {
+      padding-left: $mobileHorisontalPadding;
+      padding-right: $mobileHorisontalPadding;
+
+      min-width: 100%;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.copyrights-table-wrapper {
+  display: table;
+  height: 100%;
+
+  @include mobile {
+    margin: 0 auto;
+  }
+}
+
+.the-hole {
+  margin-top: 20px;
+}
+
+.copyrights {
+  display: table-cell;
+
+  vertical-align: middle;
+  padding-left: 1em;
+  padding-top: 4px;
+
+  font-family: Arial, Tahoma;
+  font-size: 0.8em;
+  color: #777;
+}
+
+
+/* Modifiers
+------------------------------------------------------------------- */
+.no-top-margin{
+    margin-top: 0;
+}
+
+.no-left-margin{
+    margin-left: 0;
+}
+
+.valign-bottom{
+    vertical-align: bottom;
+}
+
+/* Makes full width if element is centered in the window https://css-tricks.com/full-width-containers-limited-width-parents/ */
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  @include mobile {
+    width: 100%;
+    left: auto;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.dull-meta-color {
+  color: $dullMetaColor;
+}
+
+.vivid-meta-color {
+  color: $vividMetaColor;
+}
+
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
-@import "svg-icons";

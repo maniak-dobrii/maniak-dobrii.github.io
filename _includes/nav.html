@@ -1,0 +1,37 @@
+            {% comment %} There are two possible nav_id values: "posts" and "about" {% endcomment %}
+
+            {% comment %} // By default nav_id is posts {% endcomment %}
+            {% assign nav_id = "posts" %}
+
+            {% comment %} // about {% endcomment %}
+            {% if page.path == "about.html" %}
+                {% assign nav_id = "about" %}
+            {% endif %}
+
+
+            {% comment %} // Determine class of "about" menu item <a> (about_nav_class) {% endcomment %}
+            {% if nav_id == "about" %}
+            	{% assign about_nav_class = "selected" %}
+            {% else %}
+            	{% if page.is_post %}
+            		{% assign about_nav_class = "post" %}
+            	{% else %}
+            		{% assign about_nav_class = nil %}
+            	{% endif %}            
+            {% endif %}
+
+			{% comment %} // Determine class of "posts" menu item <a> (posts_nav_class) {% endcomment %}
+            {% if nav_id == "posts" %}
+            	{% if page.is_post %}
+            		{% assign posts_nav_class = "selected_post" %}
+            	{% else %}
+            		{% assign posts_nav_class = "selected" %}
+            	{% endif %}
+            {% else %}
+            	{% if page.is_post %}
+            		{% assign posts_nav_class = "post" %}
+            	{% else %}
+            		{% assign posts_nav_class = nil %}
+            	{% endif %}            
+            {% endif %}
+

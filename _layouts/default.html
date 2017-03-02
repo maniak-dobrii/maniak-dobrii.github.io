@@ -5,48 +5,40 @@
 
     {% include meta.html %}
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     <link rel="icon" href="{{ site.baseurl }}/favicon.ico" type="image/x-icon" />
-
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
   </head>
 
   <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+    <div class="{% if page.is_post %}top-stripe-post{% else %}top-stripe{% endif %}"></div>    
+    <div id="wrapper"> <!-- wrapper  -->
+      <header class="header clearfix">
+        <a href="{{ site.baseurl }}/" id="logo" class="{% if page.is_post %}logo_post{% else %}logo_main{% endif %}">MANIAK_dobrii</a>
 
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
+        <nav>
+          {% include nav.html %}
+          <a href="{{ site.baseurl }}/" {% if posts_nav_class != nil %} class="{{ posts_nav_class }}" {% endif %}>posts</a>
+          <a href="{{ site.baseurl }}/about" {% if about_nav_class != nil %} class="{{ about_nav_class }}" {% endif %}>about</a>
+        </nav>
+      </header>
 
-          <nav>
-            <a href="{{ site.baseurl }}/">posts</a>
-            <a href="{{ site.baseurl }}/about">about</a>
-          </nav>
-        </header>
+
+      <main id="main" role="main">
+        <span class="{% if page.is_post %}logo_name_post{% else %}logo_name_main{% endif %}">Misha Solodovnichenko</span>
+        {{ content }}
+      </main>
+    </div> <!-- ENDOF wrapper -->
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="copyrights-table-wrapper">
+          <img width="65" height="64" src="/images/hole.png" alt="The hole!" class="the-hole">
+          <span class="copyrights">© Mikhail Solodovnichenko</span>
+        </div>
       </div>
-    </div>
-
-    <div id="main" role="main" class="container">
-      {{ content }}
-    </div>
-
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
-      </div>
-    </div>
-
-    {% include analytics.html %}
+    </footer>
   </body>
+
+  {% include analytics.html %}
 </html>

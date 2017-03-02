@@ -1,0 +1,1 @@
+{% comment %} This requires "date" variable to be set via include {% endcomment %}{% if include.date %}{{ include.date | date: "%e.%b.%Y" | downcase | lstrip }}{% endif %}

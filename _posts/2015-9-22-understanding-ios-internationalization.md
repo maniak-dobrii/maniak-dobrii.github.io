@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Understanding iOS internationalization
-update_date: 2017-02-27T18:07:35+04:00
+update_date: 2017-03-01T21:15:53+04:00
 updates:
   - date: 2017-03-01T21:15:53+04:00
     msg: "Cosmetic updates to fit new site design, added table of contents and note on the length."

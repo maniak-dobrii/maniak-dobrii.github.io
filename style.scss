@@ -341,7 +341,20 @@ main {
 
 
   p {
-    text-align:justify;
+    text-align: justify;
+    line-height: 1.5;
+
+    @include word-wrap;
+  }
+}
+
+.entry {
+  a:hover {
+    text-decoration: underline;
+  }
+
+  p {
+    text-align: justify;
     line-height: 1.5;
 
     @include word-wrap;
@@ -568,4 +581,3 @@ footer {
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
-@import "svg-icons";

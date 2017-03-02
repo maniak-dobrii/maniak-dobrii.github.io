@@ -522,3 +522,4 @@ If you are looking for some deeper insight on the topic, here are some relevant 
  - [Technical Q&A QA1828: How iOS Determines the Language For Your App](https://developer.apple.com/library/prerelease/ios/qa/qa1828/_index.html)
  - [upluralrules.h](http://www.opensource.apple.com/source/ICU/ICU-491.11.3/icuSources/i18n/unicode/upluralrules.h)
  - [CFBundle_Locale.c from apple open source git mirror](https://github.com/opensource-apple/CF/blob/3cc41a76b1491f50813e28a4ec09954ffa359e6f/CFBundle_Locale.c)
+ - [My talk from 2015 (in Russian) on the topic](https://events.yandex.ru/lib/talks/3281/)

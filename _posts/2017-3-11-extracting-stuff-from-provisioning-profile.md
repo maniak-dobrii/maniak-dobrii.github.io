@@ -225,4 +225,4 @@ I gave you *how*, but I won't give you *why*. Probably, if you need this, you ra
 Want Finder preview (select a file and hit `Space`) be more informative for provision profiles? Like this:
 ![ProvisionQL teaser]({{ site.baseurl }}/images/posts/extracting-stuff-from-provisioning-profile/provisionQLTeaser.png)
 
-Than here's [ProvisionQL](https://github.com/ealeksandrov/ProvisionQL), it is very useful, and also works for `.ipa` files. See [what it can do](https://github.com/ealeksandrov/ProvisionQL/blob/master/screenshots.md).
+Than here's [ProvisionQL](https://github.com/ealeksandrov/ProvisionQL), it is very useful, and also works for `.ipa` files. See [what it can do](https://github.com/ealeksandrov/ProvisionQL/blob/master/Screenshots/README.md).
